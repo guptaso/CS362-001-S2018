@@ -87,6 +87,7 @@ public class DataHandlerTest{
 	DataHandler dh7 = new DataHandler("filename5");
 	invalidAppt.setValid();
 	assertFalse(dh7.saveAppt(invalidAppt));
+	assertTrue(dh7.save());
 	assertFalse(dh7.deleteAppt(invalidAppt));
   }
 
@@ -108,6 +109,7 @@ public class DataHandlerTest{
 	appt0.setRecurrence(numArr, appt0.RECUR_BY_WEEKLY, 3, 3);
 	assertTrue(dh9.saveAppt(appt0));
 	dh9.getApptRange(apt6, apt5);
+	//assertTrue(dh9.isValid());
   }
 
   @Test(timeout = 4000)
@@ -115,6 +117,7 @@ public class DataHandlerTest{
 	DataHandler dh10 = new DataHandler("filename8");
 	Appt appt90 = new Appt(1, 30, 20, 4, 2018, "Homework", "Study Day", "person@gmail.com");
 	assertTrue(dh10.saveAppt(appt90));
+	assertTrue(appt90.getValid());
 	try {
 		dh10.getApptRange(apt5, apt6);
 	}
@@ -122,4 +125,33 @@ public class DataHandlerTest{
 	}
    
   }
+
+  @Test(timeout = 4000) 
+  public void test11() throws Throwable {
+	DataHandler data = new DataHandler("filename9", true);
+	Appt appoint = new Appt(0, 0, 0, 0, 0, null, null, null);
+	assertFalse(data.deleteAppt(appoint));
+	Appt appoint2 = new Appt(1, 1, 1, 1,1, "some", "some", "some");
+	data.saveAppt(appoint2);
+	Appt appoint3 = new Appt(1, 1, 1, 1,1, "some", "some", "some");
+	data.saveAppt(appoint3);
+	assertTrue(data.deleteAppt(appoint3));
+	assertEquals(appoint3.getXmlElement(), null);
+	assertTrue(data.save());
+  }
+  
+  @Test(timeout = 4000)
+  public void test12() throws Exception {
+	DataHandler data = new DataHandler("filname10");
+	boolean thrown = false;
+	try {
+		data.save();
+	} catch (Exception e) {
+		thrown = true;
+	}
+	assertFalse(thrown);
+
+  }
+
+
 }

@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import calendar.Appt;
 import calendar.CalDay;
-
+import java.util.*;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 public class CalDayTest{
@@ -15,6 +15,9 @@ public class CalDayTest{
   Appt appt3 = new Appt(13, 29, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
   Appt appt4 = new Appt(20, 5, 2018, "OT", "OT", "OT@gmail.com");
   Appt appt5 = new Appt(0, 2, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
+  Appt appt6 = new Appt(23, 2, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
+  Appt appt7 = new Appt(12, 29, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
+  Appt appt8 = new Appt(12, 10, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
   Appt invalidAppt = new Appt (-1, -1, -1, -1, -1, null, null, null);
 
   @Test(timeout = 4000)
@@ -84,4 +87,65 @@ public class CalDayTest{
 	appt9.setValid();
 	day6.addAppt(appt9);
   }	
+
+
+  @Test(timeout = 4000) 
+  public void test07() throws Throwable {
+	GregorianCalendar cal6 = new GregorianCalendar(2018, 4, 21, 11, 49, 00);
+	CalDay day6 = new CalDay(cal6);
+	day6.addAppt(appt7);
+	appt7.setValid();
+	assertEquals("5-21-2018 \n\t0:29AM OT OT Day ",day6.getFullInfomrationApp(day6));
+	java.util.LinkedList <calendar.Appt> appt8;
+	appt8=day6.getAppts();
+	assertTrue(appt7.getValid());
+  }	
+
+  @Test(timeout = 4000) 
+  public void test08() throws Throwable {
+	GregorianCalendar cal6 = new GregorianCalendar(2018, 4, 21, 11, 49, 00);
+	LinkedList<Appt> a = new LinkedList<Appt>();
+	
+	CalDay day6 = new CalDay(cal6);
+	assertEquals(day6.getAppts(), a);
+	assertEquals(day6.getAppts().size(),0);
+	day6.addAppt(appt8);
+	appt8.setValid();
+	assertEquals("5-21-2018 \n\t0:10AM OT OT Day ",day6.getFullInfomrationApp(day6));
+  	Appt appt9 = new Appt(18, 30, 20, 4, 2018, "HW", "HW Day", "p@gmai.com");
+	appt9.setValid();
+	day6.addAppt(appt9);
+	//assertEquals(day6.addAppt(appt9), day6.getAppts());
+  }	
+
+  @Test(timeout = 4000) 
+  public void test09() throws Throwable {
+	CalDay day6 = new CalDay();
+	assertFalse(day6.isValid());
+	assertEquals(day6.iterator(), null);
+  	Appt appt12 = new Appt(2, 29, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
+	assertEquals(day6.iterator(), null);
+	//Appt appt9 = new Appt(null,null,null,null,null,null,null,null);
+  }
+ 
+  @Test(timeout = 4000) 
+  public void test10() throws Throwable {
+	GregorianCalendar cal6 = new GregorianCalendar();
+	CalDay day = new CalDay(cal6);
+  	Appt appt12 = new Appt(2, 29, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
+	Appt appt13 = new Appt(13, 29, 19, 3, 2019, "OT", "OT Day", "g@gmail.com");
+	Appt appt14 = new Appt(20, 5, 2018, "OT", "OT", "OT@gmail.com");
+	java.util.LinkedList <calendar.Appt> appt30;
+	day.addAppt(appt12);
+	day.addAppt(appt13);
+	day.addAppt(appt14);
+	appt30 = day.getAppts();
+	String convert;
+	int size;
+	size = day.getSizeAppts();
+	assertTrue(appt12.getValid());
+	assertEquals(3, size);
+	convert = day.toString();
+//	assertEquals(convert, " ");
+  }
 }

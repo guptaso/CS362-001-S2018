@@ -78,6 +78,7 @@ public class ApptTest  {
 	public void test09() throws Throwable {
 	Appt appt9 = new Appt(0, 30, 1, 2, 1000, "Nothing", "Empty Day", "person@gmail.com");
 	appt9.setValid();
+	assertTrue(appt9.getValid());
 }
 
 @Test(timeout = 4000) 
@@ -87,5 +88,64 @@ public class ApptTest  {
 	assertFalse(appt9.getValid());
 }
 
+@Test(timeout = 4000) 
+	public void test11() throws Throwable {
+	Appt appt9 = new Appt(1, 1, 1, -1, 1900, "Nothing", "Empty Day", "person@gmail.com");
+	appt9.setValid();
+	assertFalse(appt9.getValid());
+}
 
+@Test(timeout = 4000)
+	public void test12() throws Throwable {
+	Appt appt9 = new Appt(1, 1, 1, 10, 0, "Nothing", "Empty Day", "person@gmail.com");
+	appt9.setValid();
+	assertFalse(appt9.getValid());	
+
+}
+@Test(timeout = 4000)
+	public void test13() throws Throwable {
+	Appt appt9 = new Appt(2, 59, 1, 10, 0, "Nothing", "Empty Day", "person@gmail.com");
+	appt9.setValid();
+	assertFalse(appt9.getValid());	
+}
+
+@Test(timeout = 4000)
+	public void test14() throws Throwable {
+	Appt appt9 = new Appt(2, 0, 12, 10,1000, "Nothing", "Empty Day", "person@gmail.com");
+	appt9.setValid();
+	assertTrue(appt9.getValid());	
+}
+@Test(timeout = 4000)
+	public void test15() throws Throwable {
+	Appt appt9 = new Appt(23, 59, 1, 10,1000, "Nothing", "Empty Day", "person@gmail.com");
+	appt9.setValid();
+	assertTrue(appt9.getValid());	
+}/*
+@Test(timeout = 4000)
+	public void test16() throws Throwable {
+	Appt appt9 = new Appt(23, 59, 0, 10,1000, "Nothing", "Empty Day", "person@gmail.com");
+	appt9.setValid();
+	assertFalse(appt9.getValid());
+	assertEquals(appt9.toString(), "\tThis appointment is not valid");	
+}
+*/
+@Test(timeout = 4000) 
+	public void test17() throws Throwable {
+		Appt appt2 = new Appt(11, 30, 9, 24, 2018, "Nothing", "Empty Day", "person@gmail.com");
+		String string2 = appt2.toString();
+		assertEquals("\t24/9/2018 at 11:30am ,Nothing, Empty Day\n", string2);	
+		appt2.getXmlElement();
+}
+
+@Test(timeout = 4000) 
+	public void test18() throws Throwable {
+	Appt appt3 = new Appt(0, 30, 1, 2, 2000, "Nothing", "Empty Day", "person@gmail.com");
+	assertEquals(appt3.getXmlElement(), null);
+	int [] num = {1,2};
+	appt3.setRecurrence(num, 1, 1, 1);
+	assertEquals(appt3.getRecurIncrement(), 1);
+	assertTrue(appt3.isRecurring());
+	assertTrue(appt3.getValid());
+	appt3.setValid();
+}
 }
