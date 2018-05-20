@@ -85,7 +85,7 @@ public class ApptRandomTest {
 		                  title,
 		                 description,
 		                 emailAddress);
-
+			//appt.setValid();
 			 if(!appt.getValid())continue;
 			for (int i = 0; i < NUM_TESTS; i++) {
 					String methodName = ApptRandomTest.RandomSelectMethod(random);
@@ -95,29 +95,67 @@ public class ApptRandomTest {
 						}
 					   else if (methodName.equals("setRecurrence")){
 						   int sizeArray=ValuesGenerator.getRandomIntBetween(random, 0, 8);
-						   int[] recurDays=ValuesGenerator.generateRandomArray(random, sizeArray);
+						   //int[] recurDays=ValuesGenerator.generateRandomArray(random, sizeArray);
+						   int[] recurDays = null;
 						   int recur=ApptRandomTest.RandomSelectRecur(random);
 						   int recurIncrement = ValuesGenerator.RandInt(random);
 						   int recurNumber=ApptRandomTest.RandomSelectRecurForEverNever(random);
 						   appt.setRecurrence(recurDays, recur, recurIncrement, recurNumber);
+						   appt.setValid();
+						   assertFalse(appt.getValid());
+						   //assertEquals(recurDays,appt.getRecurDays());
+						   assertTrue(appt.isOn(appt.getStartDay(), appt.getStartMonth(), appt.getStartYear()));
+				       		   assertFalse(appt.isOn(1,1,1));
 						}				
 				}
-				
+						
 				 elapsed = (Calendar.getInstance().getTimeInMillis() - startTime);
 			        if((iteration%10000)==0 && iteration!=0 )
 			              System.out.println("elapsed time: "+ elapsed + " of "+TestTimeout);
 			 
 			}
+
+		Appt appt = new Appt (-1, -1, 0, 0, -1, null, null, null);
+		appt.setValid();
+		assertTrue(appt.getValid());
+
+
+		Appt appt1 = new Appt (-1, -1, 0, 13, -1, null, null, null);
+		appt1.setValid();
+		assertTrue(appt1.getValid());
+
+		Appt appt2 = new Appt (-1, -1, 0, 1, -1, null, null, null);
+		appt2.setValid();
+		assertTrue(appt2.getValid());
+
+		Appt appt3 = new Appt (24, -1, 0, 1, -1, null, null, null);
+		appt3.setValid();
+		assertTrue(appt3.getValid());
+
+
+		Appt appt4 = new Appt (23, -1, 0, 1, -1, null, null, null);
+		appt4.setValid();
+		assertTrue(appt4.getValid());
+
+		Appt appt5 = new Appt (23, 60, 0, 1, -1, null, null, null);
+		appt5.setValid();
+		assertTrue(appt5.getValid());
+
+		Appt appt6 = new Appt (23, 50, 0, 1, -1, null, null, null);
+		appt6.setValid();
+		assertTrue(appt6.getValid());
+
+		Appt appt7 = new Appt (23, 50, 40, 1, 2000, null, null, null);
+		appt7.setValid();
+		assertTrue(appt7.getValid());
+
+		Appt appt8 = new Appt (23, 50, 0, 1, 2000, null, null, null);
+		appt8.setValid();
+		assertTrue(appt8.getValid());
 		}catch(NullPointerException e){
 			
 		}
 	 
 		 System.out.println("Done testing...");
 	 }
-
-
-	
-
-
-	
 }
