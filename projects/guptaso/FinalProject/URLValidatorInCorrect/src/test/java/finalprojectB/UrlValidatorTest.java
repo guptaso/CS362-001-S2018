@@ -2,6 +2,8 @@
 package finalprojectB;
 
 import junit.framework.TestCase;
+//import java.util.Random;
+//import java.util.calendar;
 
 //You can use this as a skeleton for your 3 different test approach
 //It is an optional to use this file, you can generate your own test file(s) to test the target function!
@@ -13,9 +15,12 @@ import junit.framework.TestCase;
 
 public class UrlValidatorTest extends TestCase {
 
-
+	private UrlValidator urlVal;
+	private String url = "";
+		
    public UrlValidatorTest(String testName) {
       super(testName);
+   	urlVal = new UrlValidator(null,null,UrlValidator.ALLOW_ALL_SCHEMES);
    }
 
    
@@ -23,38 +28,37 @@ public class UrlValidatorTest extends TestCase {
    public void testManualTest()
    {
 //You can use this function to implement your manual testing	   
-	url = "";
-	System.out.println(urlValidatorInCorrect.isValid(url));
+
+   	//Expect: invalid Result:invalid 
+   	System.out.println(urlVal.isValid(""));
+
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid(":// www.google.com:80/test1?action=view"));
+
+	//Expect: valid Result: valid 
+   	System.out.println(urlVal.isValid("http://www.google.com?x=1"));
+
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid(":/www.cs.com"));
+
+	//Expect: valid Result: valid
+  	System.out.println(urlVal.isValid("http://www.oregonstate.edu")); 	
+
+	//Expect: valid Result: valid
+	System.out.println(urlVal.isValid("http://www.yahoo.com"));
 	
-	url = ":// www.google.com:80/test1?action=view";
-	System.out.println(urlValidatorInCorrect.isValid(url));
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid("http://http://www.yahoo.com"));
+	
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid("http://www.google.com:8899993803039"));	
+	
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid("http://www.yahoo.com:80/.."));
 
-	url = " http://www.google.com:80/test1?action=view";
-	System.out.println(urlValidatorInCorrect.isValid(url));
+	//Expect: valid Result: valid 
+   	System.out.println(urlVal.isValid("http://www.google.com/"));
 
-	url = "www.cs.com";
-	System.out.println(urlValidatorInCorrect.isValid(url));
-
-	url = " https://www.google.com:80/test1?action=view";
-	System.out.println(urlValidatorInCorrect.isValid(url));
-
-	url = "http://www.yahoo.com";	
-	System.out.println(urlValidatorInCorrect.isValid(url));
-   
-	System.out.println("EXPECTED\n:");
-
-   	//Expect: invalid Result: 
-   	System.out.println(urlValidatorInCorrect.isValid(""));
-	//Expect: invalid Result: 
-	System.out.println(urlValidatorInCorrect.isValid(":// www.google.com:80/test1?action=view"));
-   	//Expect: valid Result: 
-	System.out.println(urlValidatorInCorrect.isValid(" http://www.google.com:80/test1?action=view"));
-   	//Expect: invalid Result: 
-	System.out.println(urlValidatorInCorrect.isValid("www.cs.com"));
-   	//Expect: valid Result: 
-	System.out.println(urlValidatorInCorrect.isValid(" https://www.google.com:80/test1?action=view"));
-   	//Expect: valid Result: 
-	System.out.println(urlValidatorInCorrect.isValid("http://www.yahoo.com"));
    }
    
    
