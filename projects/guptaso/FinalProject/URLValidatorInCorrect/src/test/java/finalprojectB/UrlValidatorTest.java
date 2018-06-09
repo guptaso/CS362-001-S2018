@@ -10,19 +10,57 @@ import junit.framework.TestCase;
 
 
 public class UrlValidatorTest extends TestCase {
+	private UrlValidator urlVal;
+	private String url = "";
+
 	public UrlValidatorTest(String testName) {
 		super(testName);
-}
-
+		urlVal = new UrlValidator(null,null,UrlValidator.ALLOW_ALL_SCHEMES);
+	}
+	
 	public void testManualTest() {
 	//You can use this function to implement your manual testing	   
-	   
+
+	// Expect: invalid Result:invalid 
+	System.out.println(urlVal.isValid(""));
+
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid(":// www.google.com:80/test1?action=view"));
+	
+	//Expect: valid Result: valid 
+	System.out.println(urlVal.isValid("http://www.google.com?x=1"));
+	
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid(":/www.cs.com"));
+	
+	//Expect: valid Result: valid
+	System.out.println(urlVal.isValid("http://www.oregonstate.edu")); 	
+	
+	//Expect: valid Result: valid
+	System.out.println(urlVal.isValid("http://www.yahoo.com"));
+		
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid("http://http://www.yahoo.com"));
+		
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid("http://www.google.com:8899993803039"));	
+		
+	//Expect: invalid Result: invalid
+	System.out.println(urlVal.isValid("http://www.yahoo.com:80/.."));
+	
+	//Expect: valid Result: valid 
+   	System.out.println(urlVal.isValid("http://www.google.com/"));
+   
 	}
    
-   
+	// Tests the scheme   
 	public void testYourFirstPartition() {
-	//You can use this function to implement your First Partition testing 
+/*		//You can use this function to implement your First Partition testing 
+		String validUrl[] = {"http", "https", "ftp"};
+		String invalidUrl[] = {"HTTP", "HTTPS", "FTP", "testurl", "hTtps"};
 	
+		UrlValidator urlVal1= new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+ */
 	}
    
 	public void testYourSecondPartition(){
