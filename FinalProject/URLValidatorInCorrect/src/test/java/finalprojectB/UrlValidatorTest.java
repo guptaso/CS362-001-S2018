@@ -20,27 +20,12 @@ public class UrlValidatorTest extends TestCase {
 
    
    
-   public void testManualTest00()
+   public void testManualTest()
    {
 //You can use this function to implement your manual testing	   
-      	   String[] schemes = {"http","https"};
-   	   UrlValidator urlValidator = new UrlValidator(schemes);
 	   
-//	   assertFalse(urlValidator.isValid(""));
-  // 	   assertFalse(urlValidator.isValid(":// www.google.com:80/test1?action=view"));
-	   assertFalse(urlValidator.isValid(":/www.cs.com"));
-	   
-//	   assertTrue(urlValidator.isValid("https://google.com:80/test1?action=view"));
-//	   assertTrue(urlValidator.isValid("http://www.yahoo.com"));
-//	   assertTrue(urlValidator.isValid("http://www.google.com:80/test1?action=view"))
-	   
-	  //*NO FAILURES:
-//	   assertFalse(urlValidator.isValid("https://google.com:80/test1?action=view"));
-//	   assertFalse(urlValidator.isValid("http://www.yahoo.com"));
-//	   assertFalse(urlValidator.isValid("http://www.google.com:80/test1?action=view"));
-   	   
    }
-
+   
    
    public void testYourFirstPartition()
    {
