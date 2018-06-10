@@ -71,39 +71,18 @@ public class UrlValidatorTest extends TestCase {
 		// null scheme == invalid
 		assertFalse(urlVal3.isValidScheme(null));
 
+		// valid schemes == valid
 		assertTrue(urlVal3.isValidScheme("http"));
 		assertTrue(urlVal3.isValidScheme("https"));
 		assertTrue(urlVal3.isValidScheme("ftp"));
-
-//		asser
-/*		String validUrl[] = {"http", "https", "ftp" };
-		String invalidUrl[] = {"HTTP", "HTTPS", "FTP", "testurl", "hTtps"};
-		String restUrl = "://www.google.com/";
-		System.out.println(urlVal.isValid("https://www.google.com/"));
 	
-		UrlValidator urlVal1 = new UrlValidator();
-		System.out.println(urlVal.isValid("https://www.google.com/"));
-
-
-		// tests the valid URL, should be valid
-		System.out.println("Next 3 tests should be true\n");
-		for (int i = 0; i < 3; i++) {
-			String testString = (""+validUrl[i]+restUrl);
-			try{
-				System.out.println(urlVal.isValid(validUrl[i]+restUrl));
-//				assertTrue(urlVal.isValid(validUrl[i]+restUrl));
-//				assertTrue(urlVal.isValid(testString));
-			} catch (AssertionError e) {
-				System.out.println(testString + " failed");
-			}
-		
+		// uperclass scheme == invalid
+		try {
+			assertFalse(urlVal.isValidScheme("HTTP"));
+		} catch (AssertionError e) {
+			System.out.println("uppercase test failed\n");
 		}
-
-		System.out.println(urlVal.isValid("http://www.google.com/"));
-		System.out.println(urlVal.isValid(validUrl[0]+"://www.google.com/"));
-		System.out.println(urlVal.isValid(validUrl[0]+restUrl));
-		System.out.println(urlVal.isValid("https://www.google.com/"));
-   */
+		
 	}
 
 	// Tests the Authority
@@ -197,9 +176,21 @@ public class UrlValidatorTest extends TestCase {
 			validUrl = (schemes[randScheme]+authority[randAuthority]+port[randPort]+path[randPath]+query[randQuery]);
 		      }catch(NullPointerException e) {
 			}
+
+			boolean hold = false;
 			try {			
+				try{
+					hold=	urlVal1.isValid(validUrl);
+//				} catch (NullPointerException e) {
+				} catch (ExceptionInInitializerError e) {
+
+				}
+				assertTrue(hold);
+			
 			//System.out.println(iteration+validUrl);
-			assertTrue(urlVal1.isValid(validUrl));
+//			assertTrue(urlVal1.isValid(validUrl));
+			
+//
 		      }catch(AssertionError e) {
 		   	//System.out.println(validUrl+" failed");
 		      }
@@ -230,12 +221,25 @@ public class UrlValidatorTest extends TestCase {
 			catch (NullPointerException exe) {
 			}
 
+			boolean hold = false;
 			try{
+				try {
+				hold=	urlVal2.isValid(validUrl2);
+				} catch (NullPointerException e) {
+				}
+				assertTrue(hold);
+			
+			//System.out.println(iteration+validUrl);
+//			assertTrue(urlVal1.isValid(validUrl));
+			
+//
+		      }catch(AssertionError e) {
+		   	//System.out.println(validUrl+" failed");
 			//System.out.println(iteration+validUrl);
 			assertFalse(urlVal2.isValid(validUrl2));
 		      //}catch(Exception e) {
-		      }catch(AssertionError e) {
-		   	System.out.println(validUrl2+" failed");
+//		      }catch(AssertionError e) {
+//		   	System.out.println(validUrl2+" failed");
 		      }
 			System.out.print("\n\n");
   }
