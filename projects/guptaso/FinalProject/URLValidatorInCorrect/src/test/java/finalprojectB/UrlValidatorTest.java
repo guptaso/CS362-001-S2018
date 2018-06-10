@@ -71,6 +71,10 @@ public class UrlValidatorTest extends TestCase {
 		// null scheme == invalid
 		assertFalse(urlVal3.isValidScheme(null));
 
+		assertTrue(urlVal3.isValidScheme("http"));
+		assertTrue(urlVal3.isValidScheme("https"));
+		assertTrue(urlVal3.isValidScheme("ftp"));
+
 //		asser
 /*		String validUrl[] = {"http", "https", "ftp" };
 		String invalidUrl[] = {"HTTP", "HTTPS", "FTP", "testurl", "hTtps"};
@@ -191,12 +195,13 @@ public class UrlValidatorTest extends TestCase {
 			int randQuery = rand.nextInt(1);
 
 			validUrl = (schemes[randScheme]+authority[randAuthority]+port[randPort]+path[randPath]+query[randQuery]);
-			
+		      }catch(NullPointerException e) {
+			}
+			try {			
 			//System.out.println(iteration+validUrl);
 			assertTrue(urlVal1.isValid(validUrl));
 		      }catch(AssertionError e) {
 		   	//System.out.println(validUrl+" failed");
-		   	System.out.println(" failed");
 		      }
 			System.out.print("\n\n");
 	}
@@ -221,9 +226,14 @@ public class UrlValidatorTest extends TestCase {
 			int randQuery2 = rand2.nextInt(1);
 
 			validUrl2 = (schemes2[randScheme2]+authority2[randAuthority2]+port2[randPort2]+path2[randPath2]+query2[randQuery2]);
-			
+			}
+			catch (NullPointerException exe) {
+			}
+
+			try{
 			//System.out.println(iteration+validUrl);
 			assertFalse(urlVal2.isValid(validUrl2));
+		      //}catch(Exception e) {
 		      }catch(AssertionError e) {
 		   	System.out.println(validUrl2+" failed");
 		      }
