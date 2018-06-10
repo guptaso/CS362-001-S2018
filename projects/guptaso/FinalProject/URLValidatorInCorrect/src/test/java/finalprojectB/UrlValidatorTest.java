@@ -63,8 +63,15 @@ public class UrlValidatorTest extends TestCase {
 	}
 
  
-	// Tests the scheme   - TESTS NOT PASSING
+	// Tests the scheme   
 	public void testYourFirstPartition() {
+		System.out.println("Testing Scheme\n");
+		UrlValidator urlVal3 = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+	
+		// null scheme == invalid
+		assertFalse(urlVal3.isValidScheme(null));
+
+		asser
 /*		String validUrl[] = {"http", "https", "ftp" };
 		String invalidUrl[] = {"HTTP", "HTTPS", "FTP", "testurl", "hTtps"};
 		String restUrl = "://www.google.com/";
@@ -128,8 +135,24 @@ public class UrlValidatorTest extends TestCase {
 
 	// Tests the Path
 	public void testYourFourthPartition(){
-	//You can use this function to implement your Second Partition testing	   
+		System.out.println("Testing Path\n");
+		UrlValidator urlVal3 = new UrlValidator(null, null, UrlValidator.ALLOW_ALL_SCHEMES);
+		UrlValidator urlVal4 = new UrlValidator(null, null, UrlValidator.ALLOW_2_SLASHES);
+		// A path is not valid if there is no path
+		assertFalse(urlVal3.isValidPath(null));
+
+		// A path is not valid if there are 2 slashes, w/out a flag set
+		assertFalse(urlVal3.isValidPath("//www.google//"));
+		
+		// Invalid because no single slash indicating where to go
+		assertFalse(urlVal3.isValidPath("google"));
+		assertFalse(urlVal3.isValidPath("search"));
+	
+		// An example of a valid path
+		assertTrue(urlVal3.isValidPath("/search"));
+		
 	}
+
 
 	// Tests the query
 	public void testYourFifthPartition(){
