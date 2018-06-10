@@ -185,7 +185,7 @@ public class UrlValidatorTest extends TestCase {
 		     try{  
 			//Randomly generate random ints corresponding to URL componenets 
 			int randScheme = rand.nextInt(2);
-			int randAuthority = rand.nextInt(5);
+			int randAuthority = rand.nextInt(3);
 			int randPort = rand.nextInt(2);
 			int randPath = rand.nextInt(3);
 			int randQuery = rand.nextInt(1);
@@ -195,7 +195,8 @@ public class UrlValidatorTest extends TestCase {
 			//System.out.println(iteration+validUrl);
 			assertTrue(urlVal1.isValid(validUrl));
 		      }catch(AssertionError e) {
-		   	System.out.println(validUrl+" failed");
+		   	//System.out.println(validUrl+" failed");
+		   	System.out.println(" failed");
 		      }
 			System.out.print("\n\n");
 	}
@@ -214,7 +215,7 @@ public class UrlValidatorTest extends TestCase {
 		     try{  
 			//Randomly generate random ints corresponding to URL componenets 
 			int randScheme2 = rand2.nextInt(2);
-			int randAuthority2 = rand2.nextInt(5);
+			int randAuthority2 = rand2.nextInt(3);
 			int randPort2 = rand2.nextInt(2);
 			int randPath2 = rand2.nextInt(3);
 			int randQuery2 = rand2.nextInt(1);
