@@ -71,7 +71,7 @@ public class UrlValidatorTest extends TestCase {
 		// null scheme == invalid
 		assertFalse(urlVal3.isValidScheme(null));
 
-		asser
+//		asser
 /*		String validUrl[] = {"http", "https", "ftp" };
 		String invalidUrl[] = {"HTTP", "HTTPS", "FTP", "testurl", "hTtps"};
 		String restUrl = "://www.google.com/";
@@ -229,4 +229,4 @@ public class UrlValidatorTest extends TestCase {
 			System.out.print("\n\n");
   }
 	
-
+}
